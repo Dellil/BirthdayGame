@@ -25,7 +25,7 @@ module.exports = {
         ]
     },
     plugins: [new HtmlWebpackPlugin({
-        title: 'Birthday Game!',
+        title: 'Basic Architecture for phaser development',
         scriptLoading: 'defer'
     })]
 }
