@@ -1,4 +1,4 @@
-export default function obj_velo_space_controller(scene_obj, game_obj) {
+export default function game_obj_controller(scene_obj, game_obj) {
     let space = scene_obj.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     space.on('up', function (key, event) {
         let time_pressed = key.timeDown - key.timeUp;
