@@ -4,6 +4,9 @@
  * Chanhee Jang
  */
 import createRectangle from '../sprites/Rectangle.js';
+import obj_velo_space_controller from "../controllers/RectangleController.js";
+
+
 export default {
     preload: function preload() {
         // load local files
@@ -15,5 +18,6 @@ export default {
 
         this.physics.add.existing(rect);
         rect.body.setCollideWorldBounds(true, 0, 0);
+        obj_velo_space_controller(this, rect);
     }
 }

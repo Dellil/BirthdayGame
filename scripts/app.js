@@ -6,6 +6,7 @@
 import phaser from 'phaser';
 import prototypeScene from './scenes/PrototypeScene.js'
 
+
 const Phaser = phaser;
 
 let config = {
