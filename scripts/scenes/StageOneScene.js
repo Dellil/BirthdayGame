@@ -4,27 +4,49 @@
  * Chanhee Jang
  */
 import createRectangle from '../sprites/Rectangle.js';
-import characterController from "../controllers/CharacterController.js";
+import GameObjectController from "../controllers/CharacterController.js";
 
 
 export default class StageOneScene extends Phaser.Scene {
     constructor(config) {
         super(config);
         this.rect = null;
+        this.g_obj_conroller = null;
+        this.xV = null;
+        this.yV = null;
     }
     preload() {
         this.load.image("sky", "http://127.0.0.1:8080/resources/backgrounds/dark_night_sky.jpg");
     }
     create() {
         this.add.image(640, 360, "sky");
-        this.rect = createRectangle(this);
+        this.rectChar = createRectangle(this, 300, 720, 50, 50);
 
-        this.physics.add.existing(this.rect);
-        this.rect.body.setCollideWorldBounds(true, 0, 0);
-        characterController(this, this.rect);
+        this.physics.add.existing(this.rectChar);
+        this.rectChar.body.setCollideWorldBounds(true, 0, 0);
+
+        this.g_obj_conroller = new GameObjectController(this, this.rectChar);
+        this.g_obj_conroller.spaceController();
+
+        this.rectObstacle = createRectangle(this, 500, 720, 50, 400);
+        this.physics.add.existing(this.rectObstacle, true);
+
+
+
     }
     update() {
+        this.g_obj_conroller.leftController();
+        this.g_obj_conroller.rightController();
 
+        this.physics.collide(this.rectChar, this.rectObstacle,
+            function (first_obj, second_obj) {
+                first_obj.body.setVelocity(this.xV, this.yV);
+            },
+            function (first_obj, second_obj) {
+                this.xV = first_obj.body.velocity.x * -30;
+                this.yV = first_obj.body.velocity.y * -30;
+            }
+            , this);
     }
 }
 // TEST CODE
