@@ -4,7 +4,7 @@
  * Chanhee Jang
  */
 import phaser from 'phaser';
-import prototypeScene from './scenes/PrototypeScene.js'
+import StageManager from './scenes/StageManagerScene.js'
 
 
 const Phaser = phaser;
@@ -28,10 +28,12 @@ let config = {
         mouse: true,
         touch: false
     },
-    scene: {
-        preload: prototypeScene.preload,
-        create: prototypeScene.create
-    }
+    scene: StageManager
+    // scene: {
+    //     preload: prototypeScene.preload,
+    //     create: prototypeScene.create,
+    //     update: prototypeScene.update
+    // }
 };
 
 let game = new Phaser.Game(config);
