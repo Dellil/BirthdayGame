@@ -5,7 +5,8 @@
  */
 import createRectangle from '../sprites/Rectangle.js';
 import GameObjectController from "../controllers/CharacterController.js";
-import StageStart from './StageStart.js';
+import invokeDebug from './DebugScene.js';
+
 
 export default class StageOneScene extends Phaser.Scene {
     constructor(config) {
@@ -31,13 +32,16 @@ export default class StageOneScene extends Phaser.Scene {
         this.rectObstacle = createRectangle(this, 500, 720, 50, 400);
         this.physics.add.existing(this.rectObstacle, true);
 
-        this.invokeDebug();
+
+        invokeDebug(this);
     }
     update() {
         this.g_obj_conroller.leftController();
         this.g_obj_conroller.rightController();
 
-        this.physics.collide(this.rectChar, this.rectObstacle,
+        this.physics.collide(
+            this.rectChar,
+            this.rectObstacle,
             function (first_obj, second_obj) {
                 first_obj.body.setVelocity(this.xV, this.yV);
                 this.cameras.main.shake(300);
@@ -47,33 +51,8 @@ export default class StageOneScene extends Phaser.Scene {
                 this.yV = first_obj.body.velocity.y * -80;
 
             }
-            , this);
-    }
-
-    invokeDebug() {
-        let stageStart = this.add.text(100, 150, "Go to Start", { fontSize: '40px' });
-        stageStart.setInteractive();
-        stageStart.on("pointerdown", function (p, lX, lY, e) {
-            this.scene.scene.add("stageStart", StageStart, true);
-            this.scene.scene.remove(this.scene);
-        });
+            ,
+            this
+        );
     }
 }
-// TEST CODE
-// export default {
-//     preload: function preload() {
-//         // load local files
-//         this.load.image("sky", "http://127.0.0.1:8080/resources/backgrounds/dark_night_sky.jpg");
-//     },
-//     create: function create() {
-//         this.add.image(640, 360, "sky");
-//         let rect = createRectangle(this);
-
-//         this.physics.add.existing(rect);
-//         rect.body.setCollideWorldBounds(true, 0, 0);
-//         game_obj_controller(this, rect);
-//     },
-//     update: function (t, d) {
-
-//     }
-// }
