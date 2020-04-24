@@ -20,7 +20,6 @@ let config = {
         arcade: {
             debug: true,
             debugShowBody: true,
-            gravity: { y: 1000 }
         }
     },
     input: {
@@ -29,11 +28,6 @@ let config = {
         touch: false
     },
     scene: StageManager
-    // scene: {
-    //     preload: prototypeScene.preload,
-    //     create: prototypeScene.create,
-    //     update: prototypeScene.update
-    // }
 };
 
 let game = new Phaser.Game(config);

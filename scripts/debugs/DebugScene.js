@@ -1,4 +1,4 @@
-import StageStart from './StageStart.js';
+import StageStart from '../scenes/StageStart.js';
 
 
 export default function invokeDebug(scene_obj) {

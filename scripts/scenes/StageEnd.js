@@ -1,4 +1,4 @@
-import invokeDebug from './DebugScene.js';
+import invokeDebug from '../debugs/DebugScene.js';
 
 
 export default class StageEndScene extends Phaser.Scene {

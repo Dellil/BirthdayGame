@@ -12,11 +12,11 @@ export default class GameObjectController {
     spaceController() {
         this.space.on('up', function (key, event) {
             let time_pressed = key.timeDown - key.timeUp;
-            const velo_constant = -100;
-            if (time_pressed < -750) {
-                time_pressed = -750;
+            const velo_constant = -300;
+            if (time_pressed < -500) {
+                time_pressed = -500;
             }
-            time_pressed = time_pressed * 1.3;
+            time_pressed = time_pressed * 1.4;
             const velo_sum = time_pressed + velo_constant;
 
             this.game_obj.body.setVelocityY(velo_sum);
@@ -25,12 +25,12 @@ export default class GameObjectController {
 
     leftController() {
         this.left.on('down', function (key, event) {
-            this.game_obj.body.setVelocityX(-200);
+            this.game_obj.body.setVelocityX(-400);
         }, this);
 
         this.left.on('up', function (key, event) {
             if (this.right.isDown) {
-                this.game_obj.body.setVelocityX(200);
+                this.game_obj.body.setVelocityX(400);
             } else {
                 this.game_obj.body.setVelocityX(0);
             }
@@ -39,12 +39,12 @@ export default class GameObjectController {
 
     rightController() {
         this.right.on('down', function (key, event) {
-            this.game_obj.body.setVelocityX(200);
+            this.game_obj.body.setVelocityX(400);
         }, this);
 
         this.right.on('up', function (key, event) {
             if (this.left.isDown) {
-                this.game_obj.body.setVelocityX(-200);
+                this.game_obj.body.setVelocityX(-400);
             } else {
                 this.game_obj.body.setVelocityX(0);
             }
