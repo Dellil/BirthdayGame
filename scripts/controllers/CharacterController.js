@@ -7,6 +7,8 @@ export default class GameObjectController {
         this.right = scene_obj.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
         this.keyArray = [this.space, this.left, this.right];
+
+        this.controllAll();
     }
 
     spaceController() {
@@ -49,5 +51,11 @@ export default class GameObjectController {
                 this.game_obj.body.setVelocityX(0);
             }
         }, this);
+    }
+
+    controllAll() {
+        this.spaceController();
+        this.leftController();
+        this.rightController();
     }
 }
