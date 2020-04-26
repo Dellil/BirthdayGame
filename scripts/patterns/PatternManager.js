@@ -18,7 +18,7 @@ export default class PatternManager {
     createPatternByNums(nums) {
         let patterns = new Array();
         nums.forEach(num => {
-            patterns.push(this.pattern.getPatternInsertingNumber(num));
+            patterns.push(this.pattern.getPatternPuttingNumber(num));
         });
 
         return this.createGroup(patterns);

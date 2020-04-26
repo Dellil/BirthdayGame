@@ -28,14 +28,14 @@ export default class StageOneScene extends Phaser.Scene {
         this.g_obj_conroller = new GameObjectController(this, this.rectChar);
 
 
-        this.patternNums = new Array(4, 5, 4);
+        this.patternNums = [1, 3, 2, 7, 9, 3, 8, 1, 2, 3, 1, 3, 2, 7, 9, 3, 8, 1, 2, 3];
 
         this.stageManager = new StageOneManager(this, this.rectChar);
         this.stageManager.createPatternGroup(this.patternNums);
 
         // Time event for set to obstacles
         this.time.addEvent({
-            delay: 2000,
+            delay: 2500,
             repeat: this.stageManager.patternLength() - 1,
             callback: this.stageManager.moveFirstPattern,
             callbackScope: this.stageManager,
@@ -44,6 +44,8 @@ export default class StageOneScene extends Phaser.Scene {
 
         // Debug Button to enter start scene
         invokeDebug(this);
+
+        this.fps = this.add.text(100, 80, "", { fontSize: '30px' });
     }
 
     update() {
