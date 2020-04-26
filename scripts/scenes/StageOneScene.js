@@ -6,16 +6,11 @@
 import createRectangle from '../sprites/Rectangle.js';
 import GameObjectController from "../controllers/CharacterController.js";
 import invokeDebug from '../debugs/DebugScene.js';
-import PatternManager from '../patterns/PatternManager.js';
-
+import StageOneManager from '../stages/StageOneManager.js';
 
 export default class StageOneScene extends Phaser.Scene {
     constructor(config) {
         super(config);
-        this.rect = null;
-        this.g_obj_conroller = null;
-        this.xV = null;
-        this.yV = null;
     }
 
     preload() {
@@ -32,16 +27,26 @@ export default class StageOneScene extends Phaser.Scene {
         this.rectChar.body.gravity.y = 1000;
         this.g_obj_conroller = new GameObjectController(this, this.rectChar);
 
+
+        this.patternNums = new Array(2, 3, 1, 3, 2);
+
+        this.stageManager = new StageOneManager(this, this.rectChar);
+        this.stageManager.createPatternGroup(this.patternNums);
+
+        // Time event for set to obstacles
+        this.time.addEvent({
+            delay: 2000,
+            repeat: this.stageManager.patternLength() - 1,
+            callback: this.stageManager.moveFirstPattern,
+            callbackScope: this.stageManager,
+            startAt: 500,
+        });
+
         // Debug Button to enter start scene
         invokeDebug(this);
-
-        this.pattern = new PatternManager(this, this.rectChar);
-        this.o_group = this.pattern.getPattern2();
-        let a = this.add.group(this.o_group);
-        console.log(a);
-
     }
+    
     update() {
-        // this.pattern.pattern2CollideControl(this.o_group);
+        this.stageManager.collidePatterns();
     }
 }
