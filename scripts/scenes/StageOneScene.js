@@ -28,7 +28,7 @@ export default class StageOneScene extends Phaser.Scene {
         this.g_obj_conroller = new GameObjectController(this, this.rectChar);
 
 
-        this.patternNums = new Array(2, 3, 1, 3, 2);
+        this.patternNums = new Array(4, 5, 4);
 
         this.stageManager = new StageOneManager(this, this.rectChar);
         this.stageManager.createPatternGroup(this.patternNums);
@@ -45,7 +45,7 @@ export default class StageOneScene extends Phaser.Scene {
         // Debug Button to enter start scene
         invokeDebug(this);
     }
-    
+
     update() {
         this.stageManager.collidePatterns();
     }
