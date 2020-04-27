@@ -97,7 +97,7 @@ export default class ObstaclePattern {
 
     getPattern7() {
         let rectObstacle1 = createRectangle(this.scene, 1320, 200, 50, 400);
-        let rectObstacle2 = createRectangle(this.scene, 1600, 520, 50, 400);
+        let rectObstacle2 = createRectangle(this.scene, 1650, 520, 50, 400);
 
         return this.scene.add.group([rectObstacle1, rectObstacle2]);
     }

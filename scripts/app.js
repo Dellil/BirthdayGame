@@ -18,8 +18,8 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
-            debugShowBody: true,
+            debug: false,
+            debugShowBody: false,
         }
     },
     input: {
@@ -27,7 +27,11 @@ let config = {
         mouse: true,
         touch: false
     },
-    scene: StageManager
+    scene: StageManager,
+    fps: {
+        min: 60,
+        target: 60
+    }
 };
 
 let game = new Phaser.Game(config);

@@ -20,13 +20,15 @@ export default class StageOneScene extends Phaser.Scene {
 
     create() {
         this.add.image(640, 360, "sky");
-
+        this.physics.world.setBounds(-50, 0, 1380, 720, true, false, true, true);
+        this.physics.world.setFPS(666);
         this.rectChar = createRectangle(this, 400, 720, 50, 50);
+
         this.physics.add.existing(this.rectChar);
         this.rectChar.body.setCollideWorldBounds(true, 0, 0);
         this.rectChar.body.gravity.y = 1000;
         this.g_obj_conroller = new GameObjectController(this, this.rectChar);
-
+        this.rectChar.body.onWorldBounds = true;
 
         this.patternNums = [1, 3, 2, 7, 9, 3, 8, 1, 2, 3, 1, 3, 2, 7, 9, 3, 8, 1, 2, 3];
 
@@ -35,21 +37,31 @@ export default class StageOneScene extends Phaser.Scene {
 
         // Time event for set to obstacles
         this.time.addEvent({
-            delay: 2500,
+            delay: 2000,
             repeat: this.stageManager.patternLength() - 1,
             callback: this.stageManager.moveFirstPattern,
             callbackScope: this.stageManager,
-            startAt: 500,
+            startAt: 0,
         });
 
         // Debug Button to enter start scene
         invokeDebug(this);
 
         this.fps = this.add.text(100, 80, "", { fontSize: '30px' });
+
+        this.physics.world.on('worldbounds', function (body, up, down, left, right) {
+            if (left) {
+                body.gameObject.removeAllListeners();
+                body.gameObject.setActive(false);
+                body.gameObject.setVisible(false);
+                console.log(body);
+                body.destroy();
+            }
+        });
     }
 
     update() {
-        this.fps.setText(this.physics.world.fps);
-        this.stageManager.collidePatterns();
+        super.update();
+        this.fps.setText([this.game.getTime(), this.game.getFrame()]);
     }
 }
