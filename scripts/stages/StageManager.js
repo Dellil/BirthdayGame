@@ -1,11 +1,12 @@
 /**
  * To stage management easily.
  * 2020/04/27
+ * 
  */
 import PatternManager from '../patterns/PatternManager.js';
 
 
-export default class StageOneManager {
+export default class StageManager {
     constructor(scene_obj, player_obj) {
         this.scene = scene_obj;
         this.player = player_obj;
@@ -16,7 +17,7 @@ export default class StageOneManager {
         this.yV = 0;
         this.patternManager = new PatternManager(this.scene);
         this.ticket = null;
-
+        this.stageBgm = null;
         this.nextScene = null;
         this.name = null;
     }
@@ -71,7 +72,7 @@ export default class StageOneManager {
             this.player, this.ticket, function () {
             },
             function (obj1, obj2) {
-                console.log(this.scene, this.name);
+                this.stageBgm.destroy();
                 obj1.removeAllListeners();
                 obj1.setActive(false);
                 obj1.setVisible(false);
@@ -102,5 +103,9 @@ export default class StageOneManager {
 
     createNextStageObject() {
         this.ticket = this.patternManager.createNextStageObject();
+    }
+
+    setStageBgm(bgm) {
+        this.stageBgm = bgm;
     }
 }

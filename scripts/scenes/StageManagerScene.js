@@ -6,6 +6,6 @@ import StageOneScene from './StageOneScene.js';
 
 export default class StageManagerScene extends Phaser.Scene {
     create() {
-        this.scene.add("stage_start", StageOneScene, true);
+        this.scene.add("stage_start", StageStart, true);
     }
 }

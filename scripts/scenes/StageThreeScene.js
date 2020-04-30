@@ -14,12 +14,22 @@ export default class StageThreeScene extends StageParent {
 
     preload() {
         super.preload();
+        this.load.audio("flyers", "http://127.0.0.1:8080/resources/musics/flyers.mp3");
     }
 
     create() {
         super.create();
+        this.bgm = this.sound.add("flyers");
+
+        this.bgm.play({
+            volume: 0.3
+        });
+        this.stageManager.setStageBgm(this.bgm);
         this.enableCharacterControl();
-        this.patternNums = [4, 8, 6, 2, 9, 1, 7, 2, 3];
+        this.patternNums = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 8,
+            7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5
+        ];
         this.setNextScene(StageEnd, "STAGEEND");
         this.createPatternGroup();
         this.eventArgs = [-500];

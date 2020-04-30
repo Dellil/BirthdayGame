@@ -14,13 +14,19 @@ export default class StageOneScene extends StageParent {
 
     preload() {
         super.preload();
+        this.load.audio("moon-night", "http://127.0.0.1:8080/resources/musics/moonnight.mp3");
     }
 
     create() {
         super.create();
+        this.bgm = this.sound.add("moon-night");
 
+        this.bgm.play({
+            volume: 0.3
+        });
+        this.stageManager.setStageBgm(this.bgm);
         this.enableCharacterControl();
-        this.patternNums = [9, 2, 6, 5, 8, 1, 3, 7];
+        this.patternNums = [1, 4, 2, 5, 3, 1, 6, 3, 8, 2, 5, 4, 6, 7, 2];
         this.setNextScene(StageTwo, "STAGE2");
         this.createPatternGroup();
         this.eventArgs = [-500];
