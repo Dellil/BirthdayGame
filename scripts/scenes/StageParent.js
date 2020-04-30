@@ -15,7 +15,8 @@ export default class StageParent extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('gong1', 'http://127.0.0.1:8080/resources/image/gong1.png');
+        this.load.image('gong2', 'http://127.0.0.1:8080/resources/image/gong2.png');
     }
 
     create() {
@@ -25,7 +26,17 @@ export default class StageParent extends Phaser.Scene {
         this.physics.world.setBounds(-50, 0, 1380, 720, true, false, true, true);
         this.physics.world.setFPS(660);
         // optional to set char variable
-        this.char = createRectangle(this, 400, 720, 50, 50);
+        this.anims.create({
+            key: 'gongMovement',
+            frames: [
+                { key: 'gong1' },
+                { key: 'gong2' }
+            ],
+            duration: 800,
+            repeat: -1
+        });
+        this.char = this.add.sprite(400, 720, 'gong1').play('gongMovement');
+        // this.char = createRectangle(this, 400, 720, 50, 50);
         this.physics.add.existing(this.char);
         this.char.body.setCollideWorldBounds(true, 0, 0);
         this.char.body.gravity.y = 1000;
