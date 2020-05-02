@@ -25,37 +25,7 @@ export default class GameObjectController {
         }, this);
     }
 
-    leftController() {
-        this.left.on('down', function (key, event) {
-            this.game_obj.body.setVelocityX(-400);
-        }, this);
-
-        this.left.on('up', function (key, event) {
-            if (this.right.isDown) {
-                this.game_obj.body.setVelocityX(400);
-            } else {
-                this.game_obj.body.setVelocityX(0);
-            }
-        }, this);
-    }
-
-    rightController() {
-        this.right.on('down', function (key, event) {
-            this.game_obj.body.setVelocityX(400);
-        }, this);
-
-        this.right.on('up', function (key, event) {
-            if (this.left.isDown) {
-                this.game_obj.body.setVelocityX(-400);
-            } else {
-                this.game_obj.body.setVelocityX(0);
-            }
-        }, this);
-    }
-
     controllAll() {
         this.spaceController();
-        this.leftController();
-        this.rightController();
     }
 }
